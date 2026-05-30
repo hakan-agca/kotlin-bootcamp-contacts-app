@@ -38,12 +38,13 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.contactsapp.R
 import com.example.contactsapp.ui.theme.data.entity.Kisiler
+import com.example.contactsapp.ui.theme.uix.viewmodel.HomePageViewModel
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomePage(navController: NavController) {
+fun HomePage(navController: NavController, homeViewModel: HomePageViewModel) {
     val search = remember { mutableStateOf(false) }
     val searchTf = remember { mutableStateOf("") }
     val persons = remember { mutableStateListOf<Kisiler>() }

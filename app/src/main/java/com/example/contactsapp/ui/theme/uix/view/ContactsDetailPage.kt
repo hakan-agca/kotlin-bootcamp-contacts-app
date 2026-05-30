@@ -21,10 +21,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.contactsapp.ui.theme.data.entity.Kisiler
+import com.example.contactsapp.ui.theme.uix.viewmodel.ContactsDetailPageViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ContactsDetailPage(personComing: Kisiler){
+fun ContactsDetailPage(personComing: Kisiler,contactsDetailPageViewModel: ContactsDetailPageViewModel){
 
     val personName = remember { mutableStateOf("") }
     val contactNumber = remember { mutableStateOf("") }

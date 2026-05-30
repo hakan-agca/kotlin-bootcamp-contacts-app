@@ -19,10 +19,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.contactsapp.ui.theme.uix.viewmodel.ContactsRegistrationPageViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ContactsRegistrationPage(navController: NavController){
+fun ContactsRegistrationPage(contactsRegistrationPageViewModel: ContactsRegistrationPageViewModel){
 
     val personName = remember { mutableStateOf("") }
     val contactNumber = remember { mutableStateOf("") }
