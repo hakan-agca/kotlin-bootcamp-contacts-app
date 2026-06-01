@@ -35,9 +35,7 @@ fun ContactsDetailPage(personComing: Kisiler,contactsDetailPageViewModel: Contac
         contactNumber.value = personComing.kisi_tel
     }
 
-    fun update(personId : Int,personName: String, contactNumber: String){
-        Log.e("kişi kayıt", "$personId-$personName - $contactNumber")
-    }
+
 
     Scaffold(
         topBar = { TopAppBar(title = { Text(text = "Kişi Detay") }) }
@@ -58,7 +56,7 @@ fun ContactsDetailPage(personComing: Kisiler,contactsDetailPageViewModel: Contac
             )
             Button(modifier = Modifier.size(250.dp,50.dp),
                 onClick = {
-                    update(personComing.kisi_id,personName.value,contactNumber.value)
+                    contactsDetailPageViewModel.update(personComing.kisi_id,personName.value,contactNumber.value)
                 }) {
                 Text(text = "Güncelle")
             }

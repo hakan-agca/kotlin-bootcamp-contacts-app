@@ -28,9 +28,7 @@ fun ContactsRegistrationPage(contactsRegistrationPageViewModel: ContactsRegistra
     val personName = remember { mutableStateOf("") }
     val contactNumber = remember { mutableStateOf("") }
 
-    fun save(personName: String, contactNumber: String){
-        Log.e("kişi kayıt", "$personName - $contactNumber")
-    }
+
 
     Scaffold(
         topBar = { TopAppBar(title = { Text(text = "Kişi kayıt") }) }
@@ -51,7 +49,7 @@ fun ContactsRegistrationPage(contactsRegistrationPageViewModel: ContactsRegistra
             )
             Button(modifier = Modifier.size(250.dp,50.dp),
                 onClick = {
-                save(personName.value,contactNumber.value)
+                contactsRegistrationPageViewModel.save(personName.value,contactNumber.value)
             }) {
                 Text(text = "Kaydet")
             }

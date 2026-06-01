@@ -1,5 +1,6 @@
 package com.example.contactsapp.ui.theme.uix.view
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -25,6 +26,7 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -47,18 +49,16 @@ import kotlinx.coroutines.launch
 fun HomePage(navController: NavController, homeViewModel: HomePageViewModel) {
     val search = remember { mutableStateOf(false) }
     val searchTf = remember { mutableStateOf("") }
-    val persons = remember { mutableStateListOf<Kisiler>() }
+    val persons = homeViewModel.person.observeAsState(listOf())
     val scope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(key1 = true) {
-        val k1 = Kisiler(1, "Ahmet", "111")
-        val k2 = Kisiler(2, "mehmet", "222")
-        val k3 = Kisiler(2, "hakan", "222")
-        persons.add(k1)
-        persons.add(k2)
-        persons.add(k3)
+       homeViewModel.uploadContacts()
+        // Anasayfaya geri döndüğünde çalışır
     }
+
+
 
 
     Scaffold(
@@ -68,7 +68,8 @@ fun HomePage(navController: NavController, homeViewModel: HomePageViewModel) {
                     if (search.value) {
                         TextField(
                             searchTf.value,
-                            { searchTf.value = it },
+                            { searchTf.value = it
+                            homeViewModel.search(it)},
                             label = { Text(text = "Ara") },
                             colors = TextFieldDefaults.colors(
                                 focusedContainerColor = Color.Transparent,
@@ -131,9 +132,9 @@ fun HomePage(navController: NavController, homeViewModel: HomePageViewModel) {
                 .padding(paddingValues)
         ) {
             items(
-                count = persons.count(),
+                count = persons.value.count(),
                 itemContent = {
-                    val person = persons[it]
+                    val person = persons.value[it]
                     Card(
                         modifier = Modifier.padding(all = 5.dp)
 
@@ -160,7 +161,7 @@ fun HomePage(navController: NavController, homeViewModel: HomePageViewModel) {
                                     showSnackbar("${person.kisi_ad} Silinsin mi?",
                                         actionLabel = "Evet")
                                     if (sb == SnackbarResult.ActionPerformed){
-                                        persons.remove(person)
+                                        homeViewModel.remove(person.kisi_id)
                                     }
                                 }
                             }) {
