@@ -5,12 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.contactsapp.ui.theme.data.entity.Kisiler
 import com.example.contactsapp.ui.theme.data.repo.ContactsRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomePageViewModel: ViewModel() {
-    val contactsRepository = ContactsRepository()
+@HiltViewModel
+class HomePageViewModel @Inject constructor(var contactsRepository: ContactsRepository): ViewModel() {
     val person = MutableLiveData<List<Kisiler>>()
 
     init { // sayfa açıldığında çalışır

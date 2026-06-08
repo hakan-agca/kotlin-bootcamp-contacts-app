@@ -5,8 +5,8 @@ import android.util.Log
 import com.example.contactsapp.ui.theme.data.datasource.ContactsDatasource
 import com.example.contactsapp.ui.theme.data.entity.Kisiler
 
-class ContactsRepository {
-    val contactsDatasource = ContactsDatasource()
+class ContactsRepository(var contactsDatasource: ContactsDatasource) {
+
 
     suspend fun save(personName: String, contactNumber: String) =
         contactsDatasource.save(personName, contactNumber)

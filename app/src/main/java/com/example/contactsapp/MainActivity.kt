@@ -17,7 +17,9 @@ import com.example.contactsapp.ui.theme.uix.view.Navigation
 import com.example.contactsapp.ui.theme.uix.viewmodel.ContactsDetailPageViewModel
 import com.example.contactsapp.ui.theme.uix.viewmodel.ContactsRegistrationPageViewModel
 import com.example.contactsapp.ui.theme.uix.viewmodel.HomePageViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
      val homePageViewModel : HomePageViewModel by viewModels()
     val contactsDetailPageViewModel : ContactsDetailPageViewModel by viewModels()
